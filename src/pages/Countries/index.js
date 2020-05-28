@@ -24,6 +24,10 @@ export default function Countries() {
     async function fetchCountries(){
         const response = await api.get('/countries');
         setCountries(response.data.data);
+
+        //Adiciona o primeiro país da resposta ao estado 'country'
+        //para que a primeira pesquisa ao entrar na página realize a busca corretamente
+        setCountry(response.data.data[0].country);
     }
 
     function handleChangeCountry(e){
@@ -36,6 +40,7 @@ export default function Countries() {
 
         const response = await api.get(`/${country}`);
         setCountryInfo(response.data.data);
+        console.log(response.data.data);
 
         setLoading(false);
     }

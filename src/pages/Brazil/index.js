@@ -24,6 +24,10 @@ export default function Brazil() {
     async function fetchUfStates(){
         const response = await api.get('');
         setUfStates(response.data.data);
+
+        //Adiciona o primeiro estado da resposta ao estado 'uf'
+        //para que a primeira pesquisa ao entrar na página realize a busca corretamente
+        setUF(response.data.data[0].uf)
     }
 
     function handleChangeUF(e){
@@ -36,6 +40,7 @@ export default function Brazil() {
 
         const response = await api.get(`/brazil/uf/${uf}`);
         setUFInfo(response.data);
+        console.log(response.data);
 
         setLoading(false);
     }
